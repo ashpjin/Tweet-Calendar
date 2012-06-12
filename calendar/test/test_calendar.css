@@ -1,0 +1,24 @@
+#chart {
+  font: 10px sans-serif;
+  shape-rendering: crispEdges;
+}
+
+#axis_labels {
+	font: 10px sans-serif;
+	shape-rendering: crispEdges;
+	width: 900px;
+	height: 20px;
+	border: 2px solid gray;
+	margin-left: 26px;
+}
+
+.day {
+  fill: #fff;
+  stroke: #ccc;
+}
+
+.month {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+}

@@ -1,0 +1,42 @@
+This directory controls and generated the calendar visualization for EcoMob.
+Author: Ashley Jin
+        CENS
+        UCLA 2012
+
+Calendar data file updated using cron job.
+Uses d3.js for visuals.
+
+File Breakdown:
+-calendar.css: some visual directions
+
+-csv_generator_norm.php: outputs a csv file with all percentage data for "leafing out" only
+-csv_add_col.php: copies "norm_data.csv" to "temp.csv" with an additional column based on the search_id given in the file code; called by generate_csv.sh
+-csv_update.php: adds one day of percentage day across all search_ids (i.e. one row of data); called by csv_update.sh
+-csv_update.sh: bash script, run to update one day's worth of data in norm_data.csv (cron job)
+-generate_csv.sh: calls csv_add_col.php and copies temp back to norm_data.csv
+
+-leaf_dji.js: does d3 visual operations and pulls from norm_data.csv
+-leaf_script.php: webpage code (contains html)
+
+-norm_data.csv: contains all relevant data for rendering calendar visualizations
+-temp.csv: used only by bash scripts to generate new data columns in norm_data.csv
+
+-/outdated: past versions of php and js code 
+    -> contains version that pulls directly from database and not from csv (SLOW!!!)
+-/safekeeping_csv: past versions of csv files
+-/test: test files; generally purposeless at current time
+
+
+
+
+Known/Open Issues:
+- csv_update.sh: reads from table in database for the current year average
+     -> average is manually inputted for the current year (2012), when year becomes 2013 the averages will no longer be accurate
+	 -> no efficient script to calculate average atm (hacking it out of csv_add_col with printf)
+- year normalization from Jan1 to Dec31, possibility that this may skew results for "Winter" and similar terms because the peak season may be divided in the middle
+- Blank dates with no data between 11-09-2010 and 2-19-2011 because no collection occurred
+     -> zeros will be inserted into csv file if new csv generated, must manually delete these dates at the moment
+- leaf_dji.js: hardcoded to generate image objects for years 2009 - 2012 (says 2013 but is non-inclusive), will not display past 2012 unless updated manually
+- Server may be running in different time zone than expected; cron job might not operate as expected
+- Some files contain relative URLS
+     -> be cautious when moving directories
