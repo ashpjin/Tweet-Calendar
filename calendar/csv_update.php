@@ -49,12 +49,14 @@ if($query = $mysql_conn -> prepare("SELECT average FROM calendar_year_averages W
 // Prepared Statement for day count
 if($query = $mysql_conn -> prepare("SELECT COUNT(1) FROM search_result WHERE search_id=?  AND created >= " . $day_begin . " AND created < " . $day_end . ";"))
 {
+
+//echo "SELECT COUNT(1) FROM search_result WHERE search_id=?  AND created >= " . $day_begin . " AND created < " . $day_end . ";\n";
 	foreach ($search_id as &$id) {
 		$query -> bind_param("i", $id);
 		$query -> execute();
 		$query -> bind_result($value);
 		$query -> fetch();
-			
+	
 		// manipulate data *** need to get year max somehow! ***
 		$day_count[] = $value;
 	//	echo $id. ": " . $value . "\n";
@@ -66,6 +68,9 @@ $mysql_conn -> close();
 for($index = 0; $index < sizeof($day_count); $index++){
 	$row[] = $day_count[$index] / $averages[$index];
 }
+//print_r($day_count);
+//print_r($averages);
+//print_r($row);
 
 fputcsv($destination, $row);
 fclose($destination);

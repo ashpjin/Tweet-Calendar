@@ -38,5 +38,6 @@ Known/Open Issues:
      -> zeros will be inserted into csv file if new csv generated, must manually delete these dates at the moment
 - leaf_dji.js: hardcoded to generate image objects for years 2009 - 2012 (says 2013 but is non-inclusive), will not display past 2012 unless updated manually
 - Server may be running in different time zone than expected; cron job might not operate as expected
+     -> server "day begin" is 7:00:00 AM GMT corresponding to 12:00:00 PM US/Pacific
 - Some files contain relative URLS
      -> be cautious when moving directories
